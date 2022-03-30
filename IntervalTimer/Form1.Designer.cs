@@ -48,9 +48,9 @@
             this.countsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.countsBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.countsBox.FormattingEnabled = true;
-            this.countsBox.Location = new System.Drawing.Point(367, 18);
+            this.countsBox.Location = new System.Drawing.Point(374, 18);
             this.countsBox.Name = "countsBox";
-            this.countsBox.Size = new System.Drawing.Size(129, 65);
+            this.countsBox.Size = new System.Drawing.Size(123, 65);
             this.countsBox.TabIndex = 37;
             // 
             // tempTime
@@ -103,7 +103,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(221, 73);
             this.label1.TabIndex = 32;
-            this.label1.Text = "0:00";
+            this.label1.Text = "00:00";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // add10

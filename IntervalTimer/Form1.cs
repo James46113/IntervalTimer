@@ -32,29 +32,32 @@ namespace IntervalTimer
             }
             else
             {
-                countdown = counts[ind];
+                if (countdown <= 0f & counts.Count > 0)
+                {
+                    countdown = counts[ind];
+                    countsBox.Items.RemoveAt(0);
+                }
                 //counts.Remove(countdown);
                 Console.WriteLine(countdown);
                 timer1.Enabled = true;
                 startButton.Text = "Stop";
-                countsBox.Items.RemoveAt(0);
+                label1.Text = label1.Text = Math.Floor(countdown / 60).ToString("00") + ":" + Math.Floor(countdown % 60).ToString("00");
             }
 
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            countdown -= 1;
 
-            string secs = Math.Floor(countdown % 60).ToString();
+            string secs = Math.Floor(countdown % 60).ToString("00");
 
-            if ((Math.Floor(countdown % 60)).ToString().Length == 1)
-            {
-                secs = "0" + Math.Floor(countdown % 60).ToString();
-            }
+            //if ((Math.Floor(countdown % 60)).ToString().Length == 1)
+            //{
+            //    secs = "0" + Math.Floor(countdown % 60).ToString();
+            //}
 
-            label1.Text = Math.Floor(countdown / 60).ToString() + ":" + secs;
-            if (countdown == 0f)
+            label1.Text = Math.Floor(countdown / 60).ToString("00") + ":" + secs;
+            if (countdown <= 0f)
             {
                 foreach (int ting in counts)
                 {
@@ -75,6 +78,10 @@ namespace IntervalTimer
                 }
                 //timer1.Enabled = false;
                 //startButton.Text = "Start";
+            }
+            else 
+            {
+                countdown -= 1;
             }
             Console.WriteLine(Math.Floor(countdown / 60).ToString() + ":" + secs);
 
@@ -153,14 +160,6 @@ namespace IntervalTimer
             timer1.Enabled = false;
         }
 
-        private void Reset_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-            countdown = 0;
-            label1.Text = Math.Round(countdown, 1).ToString() + ":00";
-            startButton.Text = "Start";
-        }
-
         private void Mouse_Down(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -205,31 +204,44 @@ namespace IntervalTimer
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-
+            tempCount = 0;
+            tempTime.Text = "0:00";
+            countsBox.Items.Clear();
+            counts.Clear();
         }
 
         private void resetAllButton_Click(object sender, EventArgs e)
         {
-
+            counts.Clear();
+            countsBox.Items.Clear();
+            label1.Text = "0:00";
+            timer1.Enabled = false;
+            startButton.Text = "Start";
+            countdown = 0f;
+            tempCount = 0f;
+            tempTime.Text = "00:00";
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            counts.Add(tempCount);
-            foreach (int ting in counts)
+            if (tempCount > 0)
             {
-                Console.WriteLine(ting);
+                counts.Add(tempCount);
+                foreach (int ting in counts)
+                {
+                    Console.WriteLine(ting);
+                }
+                if ((Math.Floor(tempCount % 60)).ToString().Length == 1)
+                {
+                    countsBox.Items.Add(Math.Floor(tempCount / 60).ToString() + ":" + "0" + Math.Floor(tempCount % 60).ToString());
+                }
+                else
+                {
+                    countsBox.Items.Add(Math.Floor(tempCount / 60).ToString() + ":" + Math.Floor(tempCount % 60).ToString());
+                }
+                tempCount = 0;
+                tempTime.Text = "0:00";
             }
-            if ((Math.Floor(tempCount % 60)).ToString().Length == 1)
-            {
-                countsBox.Items.Add(Math.Floor(tempCount / 60).ToString() + ":" + "0" + Math.Floor(tempCount % 60).ToString());
-            }
-            else
-            {
-                countsBox.Items.Add(Math.Floor(tempCount / 60).ToString() + ":" + Math.Floor(tempCount % 60).ToString());
-            }
-            tempCount = 0;
-            tempTime.Text = "";
         }
     }
 }
