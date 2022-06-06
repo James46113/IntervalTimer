@@ -35,16 +35,18 @@ namespace IntervalTimer
                 if (countdown <= 0f & counts.Count > 0)
                 {
                     countdown = counts[ind];
+                    counts.Remove(countdown);
                     countsBox.Items.RemoveAt(0);
                 }
                 //counts.Remove(countdown);
-                Console.WriteLine(countdown);
+                //Console.WriteLine(countdown);
                 timer1.Enabled = true;
                 startButton.Text = "Stop";
                 label1.Text = label1.Text = Math.Floor(countdown / 60).ToString("00") + ":" + Math.Floor(countdown % 60).ToString("00");
             }
 
         }
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -61,9 +63,9 @@ namespace IntervalTimer
             {
                 foreach (int ting in counts)
                 {
-                    Console.WriteLine(ting);
+                    //Console.WriteLine(ting);
                 }
-                Console.WriteLine(counts.Count);
+                //Console.WriteLine(counts.Count);
                 if (counts.Count > 0)
                 {
                     try
@@ -76,14 +78,14 @@ namespace IntervalTimer
                         timer1.Enabled = false;
                     }
                 }
-                //timer1.Enabled = false;
-                //startButton.Text = "Start";
+                timer1.Enabled = false;
+                startButton.Text = "Start";
             }
             else 
             {
                 countdown -= 1;
             }
-            Console.WriteLine(Math.Floor(countdown / 60).ToString() + ":" + secs);
+            //Console.WriteLine(Math.Floor(countdown / 60).ToString() + ":" + secs);
 
         }
 
@@ -106,7 +108,7 @@ namespace IntervalTimer
             }
 
             tempTime.Text = Math.Floor(tempCount / 60).ToString() + ":" + secs;
-            Console.WriteLine(tempTime);
+            //Console.WriteLine(tempTime);
 
         }
 
@@ -129,7 +131,7 @@ namespace IntervalTimer
             }
 
             tempTime.Text = Math.Floor(tempCount / 60).ToString() + ":" + secs;
-            Console.WriteLine(tempCount);
+            //Console.WriteLine(tempCount);
 
         }
 
@@ -151,7 +153,7 @@ namespace IntervalTimer
                 secs = "0" + Math.Floor(tempCount % 60).ToString();
             }
             tempTime.Text = Math.Floor(tempCount / 60).ToString() + ":" + secs;
-            Console.WriteLine(tempCount);
+            //Console.WriteLine(tempCount);
 
         }
 
@@ -174,6 +176,16 @@ namespace IntervalTimer
             {
                 this.Left = e.X + this.Left - MouseDownLocation.X;
                 this.Top = e.Y + this.Top - MouseDownLocation.Y;
+            }
+        }
+
+        private void next()
+        {
+            if (counts.Count > 0)
+            {
+                countdown = counts[ind];
+                counts.Remove(countdown);
+                countsBox.Items.RemoveAt(0);
             }
         }
 
@@ -219,7 +231,7 @@ namespace IntervalTimer
             startButton.Text = "Start";
             countdown = 0f;
             tempCount = 0f;
-            tempTime.Text = "00:00";
+            tempTime.Text = "0:00";
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -229,7 +241,7 @@ namespace IntervalTimer
                 counts.Add(tempCount);
                 foreach (int ting in counts)
                 {
-                    Console.WriteLine(ting);
+                    //Console.WriteLine(ting);
                 }
                 if ((Math.Floor(tempCount % 60)).ToString().Length == 1)
                 {
@@ -241,6 +253,29 @@ namespace IntervalTimer
                 }
                 tempCount = 0;
                 tempTime.Text = "0:00";
+            }
+        }
+
+        private void skipButton_Click(object sender, EventArgs e)
+        {
+            if (counts.Count > 0)
+            {
+                try
+                {
+                    foreach (int item in counts)
+                    {
+                        //Console.WriteLine(item);
+                    }
+                    countdown = counts[ind];
+                    //Console.WriteLine(countdown);
+                    countsBox.Items.RemoveAt(0);
+                }
+                catch (Exception)
+                {
+                    timer1.Enabled = false;
+                    countdown = 0;
+                    label1.Text = "0:00";
+                }
             }
         }
     }

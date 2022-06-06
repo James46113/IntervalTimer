@@ -40,6 +40,7 @@
             this.add60 = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.skipButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // countsBox
@@ -89,7 +90,7 @@
             this.resetAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.resetAllButton.Location = new System.Drawing.Point(25, 251);
             this.resetAllButton.Name = "resetAllButton";
-            this.resetAllButton.Size = new System.Drawing.Size(220, 24);
+            this.resetAllButton.Size = new System.Drawing.Size(110, 24);
             this.resetAllButton.TabIndex = 33;
             this.resetAllButton.Text = "Reset All";
             this.resetAllButton.UseVisualStyleBackColor = true;
@@ -155,11 +156,23 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // skipButton
+            // 
+            this.skipButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.skipButton.Location = new System.Drawing.Point(142, 251);
+            this.skipButton.Name = "skipButton";
+            this.skipButton.Size = new System.Drawing.Size(110, 24);
+            this.skipButton.TabIndex = 38;
+            this.skipButton.Text = "Skip";
+            this.skipButton.UseVisualStyleBackColor = true;
+            this.skipButton.Click += new System.EventHandler(this.skipButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 301);
+            this.Controls.Add(this.skipButton);
             this.Controls.Add(this.countsBox);
             this.Controls.Add(this.tempTime);
             this.Controls.Add(this.resetButton);
@@ -190,6 +203,7 @@
         private System.Windows.Forms.Button add60;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button skipButton;
     }
 }
 
